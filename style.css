@@ -1,0 +1,25 @@
+input:invalid:not(:placeholder-shown) {
+    border-color: indianred;
+  }
+  input:valid:not(:placeholder-shown) {
+    border-color: green;
+  }
+  input {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  #reg {
+    background: green;
+    color: aliceblue;
+    font-size: 12px;
+    padding: 5px;
+  }
+  
+  button {
+    background: rgb(170, 170, 236);
+  }
+
+  button:hover{
+    box-shadow: 0 4px 8px rgba(57, 15, 149, 0.1);
+  }

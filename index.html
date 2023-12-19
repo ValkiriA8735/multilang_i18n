@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Мультиязычная форма</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- форма -->
+    <form method="POST" action="/login">
+      <fieldset>
+        <legend id="title"></legend>
+
+        <!-- выбор языка -->
+        <button id="btn"></button>
+
+        <!-- логин -->
+        <label id="login" for="login"></label>
+        <p id="text"></p>
+        <input
+          type="text"
+          name="login"
+          placeholder="login.placeholder"
+          tabindex="0"
+        />
+
+        <!-- почта -->
+        <label id="mail" for="mail"></label>
+        <p id="text2"></p>
+        <input
+          type="email"
+          id="mail"
+          name="email"
+          placeholder="email.placeholder"
+        />
+
+        <label id="password" for="password"></label>
+        <input
+          type="password"
+          placeholder="password.placeholder"
+          minlength="5"
+          maxlength="12"
+          size="12"
+          required
+        />
+
+        <label id="confirm_password" for="confirmPassword"></label>
+        <input
+          type="Password"
+          placeholder="пароль"
+          minlength="5"
+          maxlength="12"
+          size="12"
+          required
+        />
+
+        <button id="reg" type="submit"></button>
+      </fieldset>
+    </form>
+
+    <p id="text"></p>
+
+    <script src="https://unpkg.com/i18next/dist/umd/i18next.js"></script>
+
+    <script type= "module">
+      import ru from "./data/ru.js";
+      import en from "./data/en.js";
+
+      const btn = document.getElementById("btn");
+      const output = (err, t) => {
+        if (err) {
+          return console.log("something went wrong loading", err);
+        }
+        document.getElementById("title").innerHTML = i18next.t("title");
+        document.getElementById("text").innerHTML = i18next.t("text");
+        btn.innerHTML = i18next.t("changeLang");
+        document.getElementById("password").innerHTML = i18next.t("password");
+        document.getElementById("confirm_password").innerHTML =
+          i18next.t("confirm_password");
+        document.getElementById("mail").innerHTML = i18next.t("mail");
+        document.getElementById("reg").innerHTML = i18next.t("reg");
+      };
+
+      i18next.init(
+        {
+          lng: "ru",
+          fallbacklng: ["en", "ru"],
+          resources: {
+            en,
+            ru
+          }
+        },
+        output
+      );
+
+      btn.onclick = () => {
+        const lang = i18next.language === "en" ? "ru" : "en";
+
+        i18next.changeLanguage(lang, output);
+      };
+    </script>
+  </body>
+</html>
+
